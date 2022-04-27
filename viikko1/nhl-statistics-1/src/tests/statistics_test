@@ -1,0 +1,33 @@
+import unittest
+from player_reader import Player
+from statistics import Statistics
+
+class PlayerReaderStub:
+    def get_players(self):
+        return [
+            Player("Semenko", "EDM", 4, 12),
+            Player("Lemieux", "PIT", 45, 54),
+            Player("Kurri",   "EDM", 37, 53),
+            Player("Yzerman", "DET", 42, 56),
+            Player("Gretzky", "EDM", 35, 89)
+        ]
+
+class TestStatistics(unittest.TestCase):
+    def setUp(self):
+        self.statistics = Statistics(
+            PlayerReaderStub()
+        )
+
+    def test_search_with_valid_name(self):
+        print('toimii')
+        player = self.statistics.search("Semenko")
+        self.assertEqual("Semenko", player)
+
+    def test_search_with_invalid_name(self):
+        self.assertEqual(self.statistics.search("Selänne"), None)
+
+    def test_top_scorers(self):
+        player = self.statistics.top_scorers(2)
+        self.assertEqual("Semenko", player)
+    
+    
