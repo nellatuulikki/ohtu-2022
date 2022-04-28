@@ -19,15 +19,21 @@ class TestStatistics(unittest.TestCase):
         )
 
     def test_search_with_valid_name(self):
-        print('toimii')
         player = self.statistics.search("Semenko")
-        self.assertEqual("Semenko", player)
+        self.assertEqual("Semenko", player.name)
 
     def test_search_with_invalid_name(self):
         self.assertEqual(self.statistics.search("Selänne"), None)
 
     def test_top_scorers(self):
-        player = self.statistics.top_scorers(2)
-        self.assertEqual("Semenko", player)
+        players = self.statistics.top_scorers(2)
+        self.assertEqual(players[0].name, "Gretzky")
+        self.assertEqual(players[1].name, "Lemieux")
+    
+    def test_team(self):
+        players = self.statistics.team('EDM')
+        self.assertEqual(players[0].name, "Semenko")
+        self.assertEqual(players[1].name, "Kurri")
+        self.assertEqual(players[2].name, "Gretzky")
     
     
