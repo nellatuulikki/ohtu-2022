@@ -16,7 +16,7 @@ class Ostoskori:
     def hinta(self):
         yhteishinta = 0
         for ostos in self.ostoskori:
-            yhteishinta += ostos.hinta
+            yhteishinta += ostos.hinta()
         return yhteishinta
 
     def lisaa_tuote(self, lisattava: Tuote):
