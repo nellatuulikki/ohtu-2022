@@ -37,18 +37,18 @@ class Ostoskori:
 
 
     def tyhjenna(self):
-        pass
-        # tyhjentää ostoskorin
+        self.ostoskori.clear()
 
     def ostokset(self):
-        if self.ostoskori == []:
-            print('ostoskori on tyhjä')
-            pass
-
         ostokset = []
+        if self.ostoskori == []:
+            pass
+        else:
+            ostokset = []
 
-        for ostos in self.ostoskori:
-            ostokset.append(f"{ostos.tuotteen_nimi()} {ostos.lukumaara()} kappaletta")
+            for ostos in self.ostoskori:
+                if ostos.lukumaara() > 0:
+                    ostokset.append(f"{ostos.tuotteen_nimi()} {ostos.lukumaara()} kappaletta")
 
         return ostokset
         # palauttaa listan jossa on korissa olevat ostos-oliot
