@@ -45,9 +45,9 @@ class IntJoukko:
 
         return False
 
-    def kopioi_taulukko(self, a, b):
-        for i in range(0, len(a)):
-            b[i] = a[i]
+    def kopioi_taulukko(self, taulukko_a, taulukko_b):
+        taulukko_b = taulukko_a
+        return taulukko_b
 
     def mahtavuus(self):
         return self.alkioiden_lukumäärä
