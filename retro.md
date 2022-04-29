@@ -1,7 +1,7 @@
 “Start, Stop, Continue, More of, Less of” on retrospektiivitekniikka, jossa käydään läpi mihin asioihin
 tiimin kannattaisi tulevaisuudessa keskittyä ja mitä asioita poistaa prosessista. Tyypillisessä versiossa
 facilitaattori käy läpi kaikki 5 retrospektiivin osa-aluetta
-* Mitä tiimin piätisi tehdä mitä ei olla vielä tehty
+* Mitä tiimin pitäisi tehdä mitä ei olla vielä tehty
 * Mitkä asiat tiimin pitäisi jättää tekemättä
 * Mitä asioita tiimin pitäisi jatkaa
 * Mitä tiimin pitäisi tehdä lisää
