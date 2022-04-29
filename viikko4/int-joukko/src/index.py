@@ -16,8 +16,5 @@ def main():
     print(testi.to_int_list())
     print(joukko)
 
-
-
-
 if __name__ == "__main__":
     main()

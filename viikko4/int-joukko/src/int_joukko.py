@@ -53,12 +53,7 @@ class IntJoukko:
         return self.alkioiden_lukumäärä
 
     def to_int_list(self):
-        taulu = [0] * self.alkioiden_lukumäärä
-
-        for i in range(0, len(taulu)):
-            taulu[i] = self.lukujono[i]
-
-        return taulu
+        return self.lukujono[0:self.alkioiden_lukumäärä]
 
     @staticmethod
     def yhdiste(taulukko_a, taulukko_b):
