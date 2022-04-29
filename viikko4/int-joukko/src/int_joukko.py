@@ -1,20 +1,19 @@
 KAPASITEETTI = 5
 OLETUSKASVATUS = 5
 
-
 class IntJoukko:
     def __init__(self, kapasiteetti=None, kasvatuskoko=None):
         if kapasiteetti is None:
             self.kapasiteetti = KAPASITEETTI
         elif not isinstance(kapasiteetti, int) or kapasiteetti < 0:
-            raise Exception("Väärä kapasiteetti")  # heitin vaan jotain :D
+            raise Exception("Kapasiteettia ei annettu oikeassa muodossa")
         else:
             self.kapasiteetti = kapasiteetti
 
         if kasvatuskoko is None:
             self.kasvatuskoko = OLETUSKASVATUS
         elif not isinstance(kapasiteetti, int) or kapasiteetti < 0:
-            raise Exception("kapasiteetti2")  # heitin vaan jotain :D
+            raise Exception("Kasvatuskokoa ei annettu oikeassa muodossa")
         else:
             self.kasvatuskoko = kasvatuskoko
 
@@ -28,48 +27,20 @@ class IntJoukko:
         else:
             return False
 
-    def lisaa(self, n):
-        ei_ole = 0
-
-        if self.alkioiden_lukumäärä == 0:
-            self.lukujono[0] = n
-            self.alkioiden_lukumäärä += 1
-            return True
-            
-        if not self.kuuluu(n):
-            self.lukujono[self.alkioiden_lukumäärä] = n
+    def lisaa(self, luku):
+        if not self.kuuluu(luku):
+            self.lukujono[self.alkioiden_lukumäärä] = luku
             self.alkioiden_lukumäärä += 1
 
-            if self.alkioiden_lukumäärä % len(self.lukujono) == 0:
-                taulukko_old = self.lukujono
-                self.kopioi_taulukko(self.lukujono, taulukko_old)
-                self.lukujono = [0] * (self.alkioiden_lukumäärä + self.kasvatuskoko)
-                self.kopioi_taulukko(taulukko_old, self.lukujono)
+        if self.alkioiden_lukumäärä == len(self.lukujono) :
+            self.lukujono += self.kasvatuskoko * [0]
 
-            return True
+    def poista(self, luku):
 
-        return False
-
-    def poista(self, n):
-        kohta = -1
-        apu = 0
-
-
-        for i in range(0, self.alkioiden_lukumäärä):
-            if n == self.lukujono[i]:
-                kohta = i  # siis luku löytyy tuosta kohdasta :D
-                self.lukujono[kohta] = 0
-                break
-
-        #if 
-
-        if kohta != -1:
-            for j in range(kohta, self.alkioiden_lukumäärä - 1):
-                apu = self.lukujono[j]
-                self.lukujono[j] = self.lukujono[j + 1]
-                self.lukujono[j + 1] = apu
-
-            self.alkioiden_lukumäärä = self.alkioiden_lukumäärä - 1
+        if self.kuuluu(luku):
+            self.lukujono.remove(luku)
+            self.lukujono.append(0)
+            self.alkioiden_lukumäärä -= 1
             return True
 
         return False
@@ -90,54 +61,34 @@ class IntJoukko:
         return taulu
 
     @staticmethod
-    def yhdiste(a, b):
-        x = IntJoukko()
-        a_taulu = a.to_int_list()
-        b_taulu = b.to_int_list()
+    def yhdiste(taulukko_a, taulukko_b):
+        yhdistetty_lista = IntJoukko()
 
-        for i in range(0, len(a_taulu)):
-            x.lisaa(a_taulu[i])
+        for alkio in taulukko_a.to_int_list() + taulukko_b.to_int_list():
+            yhdistetty_lista.lisaa(alkio)
 
-        for i in range(0, len(b_taulu)):
-            x.lisaa(b_taulu[i])
-
-        return x
+        return yhdistetty_lista
 
     @staticmethod
-    def leikkaus(a, b):
-        y = IntJoukko()
-        a_taulu = a.to_int_list()
-        b_taulu = b.to_int_list()
+    def leikkaus(taulukko_a, taulukko_b):
+        leikattu_lista = IntJoukko()
 
-        for i in range(0, len(a_taulu)):
-            for j in range(0, len(b_taulu)):
-                if a_taulu[i] == b_taulu[j]:
-                    y.lisaa(b_taulu[j])
+        for alkio in taulukko_a.to_int_list():
+            if alkio in taulukko_b.to_int_list():
+                leikattu_lista.lisaa(alkio)
 
-        return y
+        return leikattu_lista
 
     @staticmethod
-    def erotus(a, b):
-        z = IntJoukko()
-        a_taulu = a.to_int_list()
-        b_taulu = b.to_int_list()
+    def erotus(taulukko_a, taulukko_b):
+        erotettu_lista = IntJoukko()
 
-        for i in range(0, len(a_taulu)):
-            z.lisaa(a_taulu[i])
+        for alkio in taulukko_a.to_int_list():
+            if alkio not in taulukko_b.to_int_list():
+                erotettu_lista.lisaa(alkio)
 
-        for i in range(0, len(b_taulu)):
-            z.poista(b_taulu[i])
-
-        return z
+        return erotettu_lista
 
     def __str__(self):
-        merkkijono = "{"
-        for alkio in range(0, self.alkioiden_lukumäärä):
-            if alkio == self.alkioiden_lukumäärä - 1:
-                merkkijono += f" {self.lukujono[alkio]}"
-            elif alkio == 0:
-                merkkijono += f"{self.lukujono[alkio]},"
-            else:
-                merkkijono += f" {self.lukujono[alkio]},"
-        merkkijono += "}"
-        return merkkijono
+        merkkijono = ', '.join(str(x) for x in self.lukujono if x != 0)
+        return "{" + merkkijono + "}"

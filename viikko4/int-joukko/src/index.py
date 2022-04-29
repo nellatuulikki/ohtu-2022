@@ -1,25 +1,22 @@
 import unittest
 from int_joukko import IntJoukko
 
-
 def main():
     joukko = IntJoukko()
+    joukko2 = IntJoukko()
 
-    print(joukko)
     joukko.lisaa(1)
-    print(joukko.lukujono)
     joukko.lisaa(2)
     joukko.lisaa(3)
-    joukko.lisaa(2)
-    joukko.lisaa(10)
-    joukko.lisaa(5)
-    joukko.lisaa(6)
-    print(joukko.lukujono)
-    joukko.poista(3)
-    print(joukko.lukujono)
+    joukko2.lisaa(1)
+    joukko2.lisaa(5)
+    print(joukko.erotus(joukko, joukko2))
+    testi = joukko.erotus(joukko, joukko2)
 
-    print(joukko.to_int_list())
+    print(testi.to_int_list())
     print(joukko)
+
+
 
 
 if __name__ == "__main__":
