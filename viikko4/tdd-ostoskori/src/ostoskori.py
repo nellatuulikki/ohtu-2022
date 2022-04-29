@@ -36,7 +36,7 @@ class Ostoskori:
 
 
     def tyhjenna(self):
-        self.ostoskori.clear()
+        self.ostoskori = []
 
     def ostokset(self):
         ostokset = []
